@@ -1,8 +1,9 @@
 {
 	"name": "custom-format",
 	"displayName": "Custom Format",
+	"icon": "images/icon.png",
 	"description": "Run custom CLI commands for formatting files in VSCode",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.49.0"
 	},
@@ -12,6 +13,7 @@
 	"activationEvents": [
 		"*"
 	],
+	"publisher": "Vehmloewff",
 	"repository": {
 		"url": "https://github.com/Vehmloewff/custom-format",
 		"type": "git"

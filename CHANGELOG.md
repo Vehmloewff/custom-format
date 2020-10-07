@@ -6,4 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+_Nothing Yet_
+
+## 1.0.0
+
 - Initial release
