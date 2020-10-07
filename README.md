@@ -59,6 +59,10 @@ Before the command is executed, all instances of `$FILE` therein are replaced wi
 
 See the [changelog](/CHANGELOG.md).
 
+## Issues
+
+Please report all issues [here](https://github.com/Vehmloewff/custom-format/issues).
+
 ## License
 
 [MIT](/LICENSE)
