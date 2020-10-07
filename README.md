@@ -2,9 +2,9 @@
 
 Run custom CLI commands for formatting files in VSCode.
 
-How many times have you not been able to find a VSCode formatter for your particular purpose, when there was already a CLI to do the job?  And how much easier is it to throw together a CLI command to format your project that it is to build an extension to suit your needs?
+How many times have you not been able to find a VSCode formatter for your particular purpose when there was already a CLI to do the job?  And how much easier is it to throw together a CLI command to format your code that it is to build an extension to suit your needs?
 
-Because you are reading this, those questions can be favorably answered.  Introducing _Custom Format_.  Just add your shell commands to the `custom-format.formatters` [configuration](#configuration) and you're set.
+Because you are reading this, those questions can be favorably answered.  Introducing _Custom Format_.  Just add your CLI commands to the `custom-format.formatters` [configuration](#configuration) and you're set.
 
 ![feature X](./images/formatting.gif)
 
