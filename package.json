@@ -1,0 +1,66 @@
+{
+	"name": "custom-format",
+	"displayName": "Custom Format",
+	"description": "Run custom CLI commands for formatting files in VSCode",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.49.0"
+	},
+	"categories": [
+		"Formatters"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"repository": {
+		"url": "https://github.com/Vehmloewff/custom-format",
+		"type": "git"
+	},
+	"main": "./out/extension.js",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Custom Format",
+			"properties": {
+				"custom-format.formatters": {
+					"type": "array",
+					"default": [],
+					"markdownDescription": "An array of custom formatters.  Each formatter should have the `command` and `language` keys.  Each command is expected to read the unformatted file content from `stdin`, and print it to `stdout`.",
+					"scope": "resource",
+					"examples": [
+						[
+							{
+								"language": "javascript",
+								"command": "node scripts/custom-formatter.js"
+							}
+						],
+						[
+							{
+								"language": "typescript",
+								"command": "deno fmt -"
+							}
+						]
+					]
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"format": "prettier -w **/**",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"@types/strip-color": "^0.1.0",
+		"@types/vscode": "^1.49.0",
+		"typescript": "^4.0.2"
+	},
+	"dependencies": {
+		"execa": "^4.0.3",
+		"strip-color": "^0.1.0"
+	}
+}

@@ -1,0 +1,7 @@
+**/*.md
+yarn.lock
+images/**
+.gitignore
+.prettierignore
+.vscodeignore
+out/**
