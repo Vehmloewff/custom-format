@@ -44,7 +44,7 @@ export function activate(context: ExtensionContext) {
 			let disposable = languages.registerDocumentFormattingEditProvider(formatter.language, {
 				async provideDocumentFormattingEdits(document: TextDocument): Promise<TextEdit[]> {
 					const rawText = document.getText()
-					const filename = document.uri.path
+					const filename = document.uri.fsPath
 					const workspaceDir = getCwd(filename)
 					const formattedText = await runCommand(rawText, formatter.command, filename, workspaceDir)
 
