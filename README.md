@@ -33,10 +33,10 @@ Populate the `custom-format.formatters` setting.
 
 	// (optional) Set it as the default formatter for the languages we have configured formatters for
 	"[javascript]": {
-		"editor.defaultFormatter": "vehmloewff.custom-format"
+		"editor.defaultFormatter": "Vehmloewff.custom-format"
 	},
 	"[typescript]": {
-		"editor.defaultFormatter": "vehmloewff.custom-format"
+		"editor.defaultFormatter": "Vehmloewff.custom-format"
 	}
 }
 ```
