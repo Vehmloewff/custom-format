@@ -1,4 +1,5 @@
 import { dirname } from 'path'
+import { URL } from 'url'
 import { workspace, window, languages, ExtensionContext, TextDocument, TextEdit, Uri, commands, Range, Position } from 'vscode'
 
 import { log } from './log'
@@ -69,7 +70,8 @@ export function activate(context: ExtensionContext) {
 }
 
 function getCwd(filepath: string): string {
-	const workspacePath = workspace.getWorkspaceFolder(Uri.parse(filepath))?.uri.path
+	const pathToUse = process.platform === 'win32' ? new URL(`file://${filepath}`).href : filepath
+	const workspacePath = workspace.getWorkspaceFolder(Uri.parse(pathToUse))?.uri.fsPath
 
 	if (!workspacePath) {
 		const dir = dirname(filepath)
