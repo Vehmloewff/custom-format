@@ -31,7 +31,7 @@ export async function runCommand(text: string, command: string, filename: string
 		log(`Skipping ${filename}`)
 		return text
 	} catch (e) {
-		errorOut(`${e.shortMessage}\n${stripColor(e.stderr)}`)
+		errorOut(`${(e as any).shortMessage}\n${stripColor((e as any).stderr)}`)
 		return text
 	}
 }
