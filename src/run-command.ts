@@ -1,5 +1,5 @@
-import execa = require('execa')
-import stripColor = require('strip-color')
+import childProcess from 'child_process'
+import stripColor from 'strip-color'
 import { log, logError } from './log'
 
 export async function runCommand(text: string, command: string, filename: string, workspacePath: string): Promise<string> {
@@ -19,7 +19,36 @@ export async function runCommand(text: string, command: string, filename: string
 	const startMs = Date.now()
 
 	try {
-		const { stdout, stderr } = await execa(file, args, { input: text, cwd: workspacePath })
+		const { stdout, stderr } = await new Promise<{ stdout: string; stderr: string }>((resolve, reject) => {
+			let didReject = false
+
+			const child = childProcess.exec(
+				command,
+				{ cwd: workspacePath, env: { ...process.env, FILE: filename }, shell: process.env.SHELL },
+				(error, stdout, stderr) => {
+					if (error) {
+						if (!didReject) reject(error)
+
+						didReject = true
+						return
+					}
+
+					resolve({ stdout, stderr })
+				}
+			)
+
+			if (child.stdin) {
+				child.stdin.write(text, 'utf-8', err => {
+					if (err && !didReject) {
+						reject(err)
+						didReject = true
+						return
+					}
+
+					child.stdin!.end()
+				})
+			}
+		})
 
 		if (stderr.length) errorOut(stderr)
 
