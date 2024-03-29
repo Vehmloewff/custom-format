@@ -8,15 +8,17 @@ export async function runCommand(text: string, command: string, filename: string
 
 	if (!file) return text
 
-	const errorOut = (error: any) =>
+	const errorOut = (error: string) => {
 		logError(
-			`Received an error while running the following format command on ${filename}:\n> ${command}\nError:\n> ${error.replace(
+			`Received an error while formatting ${filename}:\n> ${command}\nError:\n> ${error.replace(
 				/\n/g,
 				'\n> '
 			)}`
 		)
+	}
 
 	const startMs = Date.now()
+	log(`Formatting ${filename} with the following command:\n> ${command}`)
 
 	try {
 		const { stdout, stderr } = await new Promise<{ stdout: string; stderr: string }>((resolve, reject) => {
@@ -53,14 +55,14 @@ export async function runCommand(text: string, command: string, filename: string
 		if (stderr.length) errorOut(stderr)
 
 		if (stdout.length) {
-			log(`Formatted ${filename} in ${Date.now() - startMs}ms using the following command:\n> ${command}`)
+			log(`Formatted ${filename} in ${Date.now() - startMs}ms`)
 			return stdout
 		}
 
 		log(`Skipping ${filename}`)
 		return text
 	} catch (e) {
-		errorOut(`${(e as any).shortMessage}\n${stripColor((e as any).stderr)}`)
+		errorOut(stripColor(`${e}`))
 		return text
 	}
 }
