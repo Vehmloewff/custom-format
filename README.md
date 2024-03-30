@@ -53,7 +53,11 @@ If there is no content written to `stdout`, error or no error, the formatting of
 
 If the command exits with a non-zero code, the formatting of the file will be skipped.
 
-Before the command is executed, all instances of `$FILE` therein are replaced with the absolute path of the file that is being formatted.
+Commands are executed in a subshell, not spawned directly.
+
+Commands are provided with the environment variable, `FILE`, which is the absolute path to the file that is being formatted.
+
+Although it is possible to read from and write to `$FILE` directly, it is better to read from `stdin` and write to `stdout` because it mutates the editor state, not the filesystem state, which could differ.
 
 ## Release Notes
 
