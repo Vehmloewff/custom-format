@@ -3,7 +3,7 @@
 	"displayName": "Custom Format",
 	"icon": "images/icon.png",
 	"description": "Run custom CLI commands for formatting files in VSCode",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"engines": {
 		"vscode": "^1.49.0"
 	},
