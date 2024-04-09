@@ -1,6 +1,16 @@
 import childProcess from 'child_process'
-import stripColor from 'strip-color'
 import { log, logError } from './log'
+
+function stripColor(input: string): string {
+	const pattern = [
+		'[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
+		'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-nq-uy=><~]))',
+	].join('|')
+
+	const regex = new RegExp(pattern, 'g')
+
+	return input.replace(regex, '')
+}
 
 export async function runCommand(text: string, command: string, filename: string, workspacePath: string): Promise<string> {
 	const args = command.replace(/\$FILE/g, filename).split(' ')
@@ -9,12 +19,7 @@ export async function runCommand(text: string, command: string, filename: string
 	if (!file) return text
 
 	const errorOut = (error: string) => {
-		logError(
-			`Received an error while formatting ${filename}:\n> ${command}\nError:\n> ${error.replace(
-				/\n/g,
-				'\n> '
-			)}`
-		)
+		logError(`Received an error while formatting ${filename}:\n> ${command}\nError:\n> ${error.replace(/\n/g, '\n> ')}`)
 	}
 
 	const startMs = Date.now()

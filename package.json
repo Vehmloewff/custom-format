@@ -60,9 +60,5 @@
 		"@types/strip-color": "^0.1.0",
 		"@types/vscode": "^1.49.0",
 		"typescript": "^4.0.2"
-	},
-	"dependencies": {
-		"execa": "^4.0.3",
-		"strip-color": "^0.1.0"
 	}
 }
